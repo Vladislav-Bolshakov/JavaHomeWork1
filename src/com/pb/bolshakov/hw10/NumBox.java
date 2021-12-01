@@ -2,95 +2,73 @@ package com.pb.bolshakov.hw10;
 
 public class NumBox <T extends Number> {
 
-    private T number;
+    private  T[] numbers;
+    private T[] max;
+    private int size = 0;
+    private int filled;
 
-    public NumBox(int size) {
-
+    public void set(int index, T number) {
+        this.numbers[index] = number;
     }
 
-    public T get(int i) {
-        return number;
-    }
-
-
-    public void set(T number) {
-        this.number = number;
-    }
-
-    public void add(T index, T num) {
-    }
-
-    public T getSize() {
-        return null;
-    }
-
-    public boolean length() {
-        return false;
-    }
-
-    public class Numbers<T extends Number> {
-
-        private final T[] number;
-        private int filled;
-
-
-        public Numbers(int size) {
-
-           this.number = (T[]) new Number[size];
+    public NumBox(int maxSize) {
+        if (maxSize <= 0) {
+            throw new IllegalArgumentException("Параметр maxSize должен быть > 0");
         }
+        numbers = (T[]) new Number[maxSize];
+    }
 
-        public void set(int index, T number) {
-            this.number[index] = number;
-        }
-
-        void add(T num) throws Exception {
-            if (this.filled >= this.number.length) {
-                throw new Exception("Array already filled!");
+    public void add(T num) throws Exception {
+            if (this.filled >= this.numbers.length) {
+                throw new Exception("Массив переполнен!");
             }
-            this.number[this.filled] = num;
-            this.filled++;
-        }
+            this.numbers[this.size] = num;
+            this.size++;
+    }
+
 
         public T get(int index) {
-            return number[index];
+            if (index >= size) {
+                return null;
+            }
+
+            return numbers[index];
         }
 
-        int length() {
-            return 0;
-
+    public int length(){
+        int size = 0;
+        for(T i : numbers){
+            if(!(i == null)){
+                size++;
+            } else size+=0;
         }
+            return size;
+    }
 
+    public double sum() {
+        double sum = 0.0;
+        for (T i : numbers) {
+            if (i == null) {
+                sum += 0;
+            } else sum += i.doubleValue();
+        }
+        return sum;
+    }
         public double average() {
             double sum = 0.0;
-            for (int i = 0; i < number.length; i++)
-                sum += number[i].doubleValue();
-            return sum / number.length;
+            for (int i = 0; i < numbers.length; i++)
+                sum += numbers[i].doubleValue();
 
+            return sum / numbers.length;
         }
 
-        public double sum() {
-            double sum = 0.0;
-            for (T i : number) {
-                if (i == null) {
-                    sum += 0;
-                } else sum += i.doubleValue();
+    public T max(){
+        T max = numbers[0];
+        for(int i = 0; i < numbers.length; i++){
+            if(numbers[i].doubleValue() > max.doubleValue()) {
+                max = numbers[i];
             }
-            return sum;
         }
-
-
-        public int max() {
-            int[] a = new int[0];
-            int max = a[0]; // saves a bit of time
-
-            for (int j = 1; j < a.length; j++) {
-                if (a[j] > max) {
-                    max = a[j];
-                }
-            }
-            return max;
-
-
-
-
-}}}
+        return max;
+    }
+}

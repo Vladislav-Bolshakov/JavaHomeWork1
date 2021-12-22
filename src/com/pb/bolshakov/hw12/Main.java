@@ -1,10 +1,43 @@
-package com.pb.bolshakov.hw11;
+package com.pb.bolshakov.hw12;
 
-import java.util.Scanner;
+import java.io.PrintStream;
+import java.time.LocalDate;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
-    public static void main(String[] args) throws Exception  {
+
+
+    public static void main(String[] args) throws Exception {
         PhoneBook con = new PhoneBook();
+        List<Contact> contact = Arrays.asList(
+
+                new Contact("Alexs", LocalDate.of(2000, 2, 4), "380500000", "Dnipro"),
+                new Contact("Rika", LocalDate.of(2010, 4, 3), "38050411000", "Kiev"),
+                new Contact("Julia", LocalDate.of(1990, 3, 2), "3805033300", "Ternovka"));
+        System.out.println("Список телефонной книги");
+
+        contact.stream()
+                .collect(Collectors.groupingBy(Contact:: getDateOfBirth))
+                .entrySet()
+                .forEach(System.out::println);
+        System.out.println("----------------------------------------");
+
+        List<String> listToSort = new ArrayList<>();
+        Set<String> uniqueValues = new HashSet<>();
+        for (Contact contact2 : contact) {
+            String name = contact2.getName();
+            if (uniqueValues.add(name)) {
+                listToSort.add(name);
+            }
+        }
+
+        for (String name : listToSort) {
+            System.out.println(name);
+        }
+
+        System.out.println("----------------------------------------");
+
 
         int flag = 0; // Круговой выход
         while(flag==0){
@@ -52,7 +85,10 @@ public class Main {
                     break;
             }
         }
+
     }
 
-}
 
+
+
+}

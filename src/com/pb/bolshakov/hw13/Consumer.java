@@ -1,35 +1,31 @@
 package com.pb.bolshakov.hw13;
 
-import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
 
-class Consumer implements Runnable {
-    // Общая очередь
-    private final Queue<Double> sharedQueue;
+public class Consumer implements Runnable {
 
-    public Consumer(Queue<Double> sharedQueue) {
-        this.sharedQueue = sharedQueue;
-    }
+    private final BlockingQueue queue;
 
     @Override
     public void run() {
-        while (true) {
-            try {
-                System.out.println("Consumed: " + consume());
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
+
+        try {
+            while (true) {
+                Integer take = (Integer) queue.take();
+                process(take);
             }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
+
     }
 
-    // Метод, извлекающий элементы из общей очереди
-    private Double consume() throws InterruptedException {
-        synchronized (sharedQueue) {
-            if (sharedQueue.isEmpty()) { // Если пуста, надо ждать
-                sharedQueue.wait();
-            }
+    private void process(Integer take) throws InterruptedException {
+        System.out.println("[Consumer] Take : " + take);
+        Thread.sleep(500);
+    }
 
-            sharedQueue.notifyAll();
-            return sharedQueue.poll();
-        }
+    public Consumer(BlockingQueue queue) {
+        this.queue = queue;
     }
 }

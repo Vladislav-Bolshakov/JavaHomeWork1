@@ -1,18 +1,17 @@
 package com.pb.bolshakov.hw13;
 
-import com.oracle.jrockit.jfr.Producer;
-
-import java.util.LinkedList;
-
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Main {
-    public static void main(String[] strings) {
-        LinkedList<Double> sharedQueue = new LinkedList<>();
 
-        int size = 3;
+    public static void main(String[] args) {
 
-        Thread consThread = new Thread(new Consumer(sharedQueue), "Consumer");
-//         Thread prodThread = new Thread(new Producer(sharedQueue, size),  "Producer");
-//        prodThread.start();
-        consThread.start();
-}}
+        BlockingQueue queue = new LinkedBlockingQueue<>(5);
+
+        new Thread(new Producer(queue)).start();
+        new Thread(new Consumer(queue)).start();
+
+    }
+
+}

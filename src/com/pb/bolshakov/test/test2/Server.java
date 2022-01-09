@@ -10,7 +10,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 
-public class Myserver {
+public class Server {
 
 
     public static ArrayList<ServerThread>list =new ArrayList<ServerThread>();

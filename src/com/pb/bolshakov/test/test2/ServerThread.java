@@ -132,9 +132,9 @@ public class ServerThread extends Thread {
 
                 // Для каждого объекта в контейнере переслать сообщение
 
-                for (int i = 0; i <Myserver.list.size(); i++) {
+                for (int i = 0; i < Server.list.size(); i++) {
 
-                    ServerThread st =Myserver.list.get(i);
+                    ServerThread st = Server.list.get(i);
 
                     // Не следует пересылать сообщение самостоятельно
 
@@ -177,7 +177,7 @@ public class ServerThread extends Thread {
 
             // Удалить в данный момент закрытого клиента из контейнера
 
-            Myserver.list.remove(this);
+            Server.list.remove(this);
 
         } catch (IOException e) {
 

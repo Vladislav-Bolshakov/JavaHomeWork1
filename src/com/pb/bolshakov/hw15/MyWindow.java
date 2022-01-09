@@ -1,4 +1,4 @@
-package com.pb.bolshakov.hw14;
+package com.pb.bolshakov.hw15;
 
 import javax.swing.*;
 import java.awt.*;

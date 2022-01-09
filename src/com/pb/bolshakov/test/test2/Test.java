@@ -6,7 +6,7 @@ public class Test {
 
     public static void main(String[] args) {
 
-        Myserver ms = new Myserver();
+        Server ms = new Server();
 
         ms.initServer();
 

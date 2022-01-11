@@ -4,13 +4,11 @@ import java.io.*;
 import java.net.*;
 import java.util.LinkedList;
 
-
 class ServerSomthing extends Thread {
 
     private Socket socket;
     private BufferedReader in;
     private BufferedWriter out;
-
 
     public ServerSomthing(Socket socket) throws IOException {
         this.socket = socket;
@@ -52,7 +50,6 @@ class ServerSomthing extends Thread {
         }
     }
 
-
     private void send(String msg) {
         try {
             out.write(msg + "\n");
@@ -75,7 +72,6 @@ class ServerSomthing extends Thread {
         } catch (IOException ignored) {}
     }
 }
-
 
 class Story {
 
@@ -112,7 +108,6 @@ class Server {
     public static final int PORT = 8080;
     public static LinkedList<ServerSomthing> serverList = new LinkedList<>();
     public static Story story;
-
 
     public static void main(String[] args) throws IOException {
         ServerSocket server = new ServerSocket(PORT);

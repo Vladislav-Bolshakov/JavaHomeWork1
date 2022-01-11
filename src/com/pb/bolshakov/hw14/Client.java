@@ -17,8 +17,6 @@ class ClientSomething {
     private String dtime;
     private SimpleDateFormat dt1;
 
-
-
     public ClientSomething(String addr, int port) {
         this.addr = addr;
         this.port = port;
@@ -41,8 +39,6 @@ class ClientSomething {
         }
 
     }
-
-
 
     private void pressNickname() {
         System.out.print("Press your nick: ");
